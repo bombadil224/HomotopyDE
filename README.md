@@ -1,4 +1,6 @@
 # HomotopyDE
+
+# HomotopyDE
 Solve Differential equations using the Homotopy method.
 Currently capable of basic ODE, PDE and systems of PDE’s. 
 
