@@ -6,8 +6,13 @@ Currently capable of basic ODE, PDE and systems of PDE’s.
 basic example of solving the wave equation
 
 begin
+<<<<<<< HEAD
     using ModelingToolkit
     using HomotopyDE
+=======
+using ModelingToolkit
+using HomotopyDE
+>>>>>>> 3a9a491 (Readme fix)
 
     println()
     println("wave equation")
@@ -40,4 +45,11 @@ begin
     phi = HomotopyDE.power_series(F)
     phi = Symbolics.substitute(phi, ħ=>-1)
 
+<<<<<<< HEAD
 println(phi)
+=======
+println(phi)
+end
+
+[![Build Status](https://github.com/bombadil224/HomotopyDE.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/bombadil224/HomotopyDE.jl/actions/workflows/CI.yml?query=branch%3Amain)
+>>>>>>> 3a9a491 (Readme fix)
