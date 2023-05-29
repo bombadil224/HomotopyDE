@@ -1,6 +1,6 @@
 @parameters ħ q
 Dq = Differential(q)
-# @variables t f(..)
+@variables t f(..)
 
 function series_solution(X, degree)
 

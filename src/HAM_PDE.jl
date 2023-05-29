@@ -20,6 +20,7 @@ function homotopy_solver(sys::PDESystem, degree::Int, order = 4::Int, initialize
         print(" of ")
         print(order)
     end
+    println("")
     println("done")
     return(u)
 end

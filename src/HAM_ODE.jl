@@ -25,6 +25,7 @@ function homotopy_solver(sys::ODESystem, degree::Int, order = 4::Int, initialize
         print(" of ")
         print(order)
     end
+    println("")
     println("done")
     return(u)
 end
