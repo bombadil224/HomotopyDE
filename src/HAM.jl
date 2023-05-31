@@ -29,7 +29,6 @@ function series_solution(X, degree)
     total = 0
     for j in 1:size(answer)[1]
         for i in 1:size(pde_system.ivs)[1]
-            #result = result * pde_system.ivs[i]^(answer[j][i])
             result = result * X[i]^(answer[j][i])
         end
         total = total + C[j] * result
@@ -48,7 +47,6 @@ function U_0(X, degree, initialize)
     else 
         Result = initialize[1]
         for i in 2:size(initialize)[1]
-        #Result = initialize[1]
             Result = Result + (1 / (i-1)) * initialize[i] * t^(i - 1)
         end
     end
@@ -113,7 +111,10 @@ function Integrate_Polynomial(Q, x, debug = 0)
 end
 
 
-function Deformation_eqn(A, u, X)  #, sys::NonlinearSystem)
+"""
+This finds the deformation equation of the oporator A
+"""
+function Deformation_eqn(A, u, X)
     phi = 0
     Result = []
 
@@ -162,8 +163,8 @@ function Next_U(R, u, t, degree)
 
 
 """
-this funciton makes a power series
-    out of the terms that it is given
+This funciton makes a power series
+    out of the terms that it is given in powers of x
 """
 function power_series(C, x=1)
     phi = 0
@@ -173,6 +174,3 @@ function power_series(C, x=1)
 
     return(phi)
 end
-
-
-

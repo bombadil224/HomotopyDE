@@ -9,5 +9,6 @@ module HomotopyDE
     include("HAM_NLSys.jl")
 
     export homotopy_solver
+    export power_series
 
 end
