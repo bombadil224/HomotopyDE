@@ -10,5 +10,6 @@ module HomotopyDE
 
     export homotopy_solver
     export power_series
+    export solve_boundary
 
 end
