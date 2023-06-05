@@ -84,14 +84,13 @@ function Integrate_Polynomial(Q, x, debug = 0)
     Result = 0
 
     if debug == 1
-        render(latexify(Q))
+        println(Q)
+        # render(latexify(Q))
     end
 
     while(Symbolics.degree(Q, x) != 0)
         n = Symbolics.degree(Q, x)
-        Result = Result + Symbolics.coeff(Q, x^n) * x^(n+1) / (n+1)
-        Q = Q - Symbolics.coeff(Q, x^n) * x^n
-
+        
         if debug == 1
             println("the valu of n is")
             println(n)
@@ -102,6 +101,8 @@ function Integrate_Polynomial(Q, x, debug = 0)
             println("the result is")
             println(Result)
         end
+        Result = Result + Symbolics.coeff(Q, x^n) * x^(n+1) / (n+1)
+        Q = Q - Symbolics.coeff(Q, x^n) * x^n
         Q = Symbolics.simplify(Q)
         Q = Symbolics.expand(Q)
     end
