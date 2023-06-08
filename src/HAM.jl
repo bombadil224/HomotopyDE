@@ -115,7 +115,7 @@ end
 """
 This finds the deformation equation of the oporator A
 """
-function Deformation_eqn(A, u, X)
+function Deformation_eqn(A, u, X, debug=0)
     phi = 0
     Result = []
 
@@ -124,6 +124,11 @@ function Deformation_eqn(A, u, X)
     for n in 1:size(u)[1]
         phi = power_series(u[n], q)
         for i in 1:size(A_2)[1]
+            if debug == 1
+                println(A_2[i])
+                println()
+                println(X[n])
+            end
             A_2[i] = Symbolics.substitute(A_2[i], X[n]=>phi)
         end
     end
