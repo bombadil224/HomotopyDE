@@ -26,6 +26,13 @@ end
     Dx = Symbolics.Differential(x)
     @test isequal(P, Symbolics.expand_derivatives(Dx(F)))
 
+    Pterms = [1, 1, 2, C]
+    @test isequal(P, power_series(Pterms, x))
+    @test isequal(P, power_series(Pterms, x, series="power"))
+    Pterms = [0, 1,   0, -1/6,    0]
+    P = x / (1.0 + (1/6)*(x^2))
+    @test isequal(P, power_series(Pterms, x, series="pade"))
+
 
     println()
     println("nonlinear second-order IVP")

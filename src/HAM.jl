@@ -169,14 +169,56 @@ function Next_U(R, u, t, degree)
 
 
 """
-This funciton makes a power series
+This funciton makes a power series or a pade series
     out of the terms that it is given in powers of x
 """
-function power_series(C, x=1)
+#   function power_series(C, x=1)
+#       phi = 0
+#       for i in 1:size(C)[1]
+#           phi = phi + C[i] * x^(i-1)
+#       end
+#   
+#       return(phi)
+#   end
+
+
+function power_series(C, x=1; series="power")
     phi = 0
     for i in 1:size(C)[1]
         phi = phi + C[i] * x^(i-1)
     end
 
-    return(phi)
+    if series == "power"
+        return(phi)
+    elseif series == "pade"
+       phi = pade(phi, x, size(C)[1])
+       return(phi)
+    else
+        return(error("Unknown series type"))
+    end
+end
+
+
+function pade(phi, x, degree)
+    a = Int(round(degree/2))
+    b = Int(degree - a)
+
+    @variables A[1:a+1]
+    @variables B[1:b]
+
+    F = power_series(A, x, series="power") - power_series(B, x, series="power") * phi ~ 0
+    linear_system = []
+    
+    G = Symbolics.simplify(F.lhs)
+    G = Symbolics.expand(G)
+
+    push!(linear_system, Symbolics.substitute(G, x=>0)~0)
+    push!(linear_system, B[1]~1)
+    for i in 1: (a + b - 1)
+        push!(linear_system, Symbolics.coeff(G, x^i)~0)
+    end
+    PadeTerms = Symbolics.solve_for(linear_system, vcat(A,B))
+    
+    result = power_series(PadeTerms[1:a+1], x) / power_series(PadeTerms[a+2:a+b+1], x)
+    return(result)
 end
